@@ -1,8 +1,19 @@
 SHELL=/bin/bash
 
 # Commands
+init:
+	pipenv install && \
+	pipenv install django && \
+	pipenv shell
+
 terminal:
 	pipenv shell
+
+new:
+	django-admin startproject $(name) && \
+	mv /home/python/app/$(name)/manage.py . && \
+	mv /home/python/app/$(name)/$(name)/* /home/python/app/$(name) && \
+	rm -rf /home/python/app/$(name)/$(name)
 
 init-dev:
 	pipenv install && \
@@ -16,6 +27,9 @@ r:
 
 migration:
 	python manage.py makemigrations
+
+migrate:
+	python manage.py migrate
 
 m:
 	python manage.py makemigrations && python manage.py migrate
